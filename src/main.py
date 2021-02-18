@@ -56,7 +56,7 @@ for t in range(T-1):
     constraints += [ u_min <= u[:,t], u[:,t] <= u_max ]
 
 prob = cp.Problem(cp.Minimize(cost), constraints)
-prob.solve(verbose=True)
+prob.solve(verbose=False)
 
 
 # plot
@@ -77,3 +77,4 @@ plt.xlabel("time [s]")
 plt.title("input")
 
 plt.show()
+plt.savefig("result.png")

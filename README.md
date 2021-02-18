@@ -1,5 +1,7 @@
 # MPC demo
 
+![](result.png)
+
 ## 依存関係
 python3
 - matplotlib
