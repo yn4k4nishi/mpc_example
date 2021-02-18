@@ -77,4 +77,3 @@ plt.xlabel("time [s]")
 plt.title("input")
 
 plt.show()
-plt.savefig("result.png")
