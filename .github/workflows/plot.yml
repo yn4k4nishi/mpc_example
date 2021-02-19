@@ -1,9 +1,13 @@
 name: Python package
 
-on: [push]
+on:
+  issue_comment:
+    types: [created, edited]
 
 jobs:
   build:
+    if: >-
+      contains(github.event.comment.body, '/run')
 
     runs-on: ubuntu-latest
 
