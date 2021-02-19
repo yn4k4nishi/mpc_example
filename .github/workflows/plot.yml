@@ -5,8 +5,7 @@ on:
 
 jobs:
   build:
-    if: ${{ !github.event.issue.pull_request }} && contains(github.event.comment.html_url, '/run') 
-    if: ${{ github.event.issue.number }} == 1
+    if: ${{ !github.event.issue.pull_request }} && contains(github.event.comment.html_url, '/run') && ${{ github.event.issue.number }} == 1
 
     runs-on: ubuntu-latest
 
