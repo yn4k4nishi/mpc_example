@@ -1,0 +1,21 @@
+name: Python package
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v2
+      with:
+        # セマンティックバージョン範囲構文もしくは厳密なPythonのバージョン
+        python-version: '3.x'
+        # オプション - x64もしくはx86アーキテクチャ、デフォルトはx64
+        architecture: 'x64'
+    # 現在のPythonのバージョンを出力して、マトリクスをテストできる
+    - name: Display Python version
+      run: python -c "import sys; print(sys.version)"
