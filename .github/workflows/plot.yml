@@ -31,11 +31,11 @@ jobs:
       run: python3 src/main.py -r -s
     
     - name: Upload a picture
-      uses: devicons/public-upload-to-imgur@v2.2.1  # Use this for the most stable version
+      uses: devicons/public-upload-to-imgur@v2.2.1
       id: imgur_step
       with:
-        path: result.png
-        client_id: ${{secrets.IMGUR_CLIENT_ID}}
+        path: ./img.png 
+        client_id: ${{secrets.IMGUR_CLIENT_ID}} 
 
 
       
