@@ -14,7 +14,6 @@ jobs:
       with:
         python-version: '3.x'
         architecture: 'x64'
-    
     - name: Cache pip
       uses: actions/cache@v2
       with:
@@ -26,16 +25,21 @@ jobs:
     
             - name: Install dependencies
       run: pip install -r requirements.txt
-    
     - name: Run Script
       run: python3 src/main.py -r -s
-    
     - name: Upload a picture
-      uses: devicons/public-upload-to-imgur@v2.2.1
+      uses: devicons/public-upload-to-imgur@v2.2.1  # Use this for the most stable version
       id: imgur_step
       with:
-        path: ./img.png 
-        client_id: ${{secrets.IMGUR_CLIENT_ID}} 
-
+        path: result.png
+        client_id: ${{secrets.IMGUR_CLIENT_ID}}
+      - name: Post comment
+        uses: peter-evans/create-or-update-comment@v1
+        env:
+          IMG_URL: ${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }} 
+        with:
+          issue-number: 1
+          body: |
+            ![image](${{env.IMG_URL}})
 
       
