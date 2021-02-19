@@ -33,13 +33,13 @@ jobs:
       with:
         path: result.png
         client_id: ${{secrets.IMGUR_CLIENT_ID}}
-      - name: Post comment
-        uses: peter-evans/create-or-update-comment@v1
-        env:
-          IMG_URL: ${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }} 
-        with:
-          issue-number: 1
-          body: |
-            ![image](${{env.IMG_URL}})
+    - name: Post comment
+      uses: peter-evans/create-or-update-comment@v1
+      env:
+        IMG_URL: ${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }} 
+      with:
+        issue-number: 1
+        body: |
+          ![image](${{env.IMG_URL}})
 
       
