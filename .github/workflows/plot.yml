@@ -12,34 +12,37 @@ jobs:
     - name: Set up Python 3.x
       uses: actions/setup-python@v2
       with:
-        # セマンティックバージョン範囲構文もしくは厳密なPythonのバージョン
         python-version: '3.x'
-        # オプション - x64もしくはx86アーキテクチャ、デフォルトはx64
         architecture: 'x64'
-    # 現在のPythonのバージョンを出力して、マトリクスをテストできる
+    
     - name: Cache pip
       uses: actions/cache@v2
       with:
-        # このパスは Ubuntu に固有です
         path: ~/.cache/pip
-        # 対応する要件ファイルにキャッシュヒットがあるかどうかを確認する
         key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
-    - name: Install dependencies
+    
+            - name: Install dependencies
       run: pip install -r requirements.txt
+    
     - name: Run Script
       run: python3 src/main.py -r -s
-    - name: Archive results image
-      uses: actions/upload-artifact@v2
-      with:
-        name: result_image
-        path: result.png
+    
     - name: Upload a picture
       uses: devicons/public-upload-to-imgur@v2.2.1  # Use this for the most stable version
+      id: imgur_step
       with:
         path: result.png
         client_id: ${{secrets.IMGUR_CLIENT_ID}}
+        - name: Post comment
+          uses: peter-evans/create-or-update-comment@v1
+          env:
+            IMG_URL: ${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }} 
+          with:
+            issue-number: 1
+            body: |
+              ![image](${{env.IMG_URL}})
 
       
