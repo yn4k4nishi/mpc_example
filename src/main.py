@@ -1,14 +1,24 @@
 #! /usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import sys
 import cvxpy as cp
 import matplotlib.pyplot as plt
 import numpy as np
 
-## 経路情報をランダムに生成するか
-# True  => ランダムに生成
-# False => プリセットを使用
-enable_random_path = False
+enable_random_path = False # 経路情報をランダムに生成するか
+enable_save_fig = False    # 図を保存するか
+
+## コマンドライン引数を処理
+args = sys.argv
+for a in args:
+    if(a == "-r"):
+        enable_random_path = True
+    if(a == "-s"):
+        enable_save_fig = True
+
+
+
 
 ## パラメータ
 n = 2    # 状態 と 入力 の次元
@@ -90,4 +100,5 @@ plt.legend()
 plt.xlabel("time [s]")
 plt.title("input")
 
+plt.savefig("result.png")
 plt.show()

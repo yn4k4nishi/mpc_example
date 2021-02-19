@@ -29,3 +29,5 @@ jobs:
           ${{ runner.os }}-
     - name: Install dependencies
       run: pip install -r requirements.txt
+    - name: Run Script
+      run: python3 main.py -r -s
