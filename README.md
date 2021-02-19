@@ -12,3 +12,5 @@ python3
 ## 実行
 `python3 main.py`
 
+ランダムに経路を生成する場合は`enable_random_path = False`を`True`にする
+
