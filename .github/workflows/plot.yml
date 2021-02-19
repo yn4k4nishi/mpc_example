@@ -1,6 +1,6 @@
 name: Python package
 
-on: [push]
+on: [issue_comment]
 
 jobs:
   build:
@@ -9,11 +9,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
     - name: Set up Python 3.x
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
         architecture: 'x64'
+    
     - name: Cache pip
       uses: actions/cache@v2
       with:
@@ -23,23 +25,25 @@ jobs:
           ${{ runner.os }}-pip-
           ${{ runner.os }}-
     
-            - name: Install dependencies
+    - name: Install dependencies
       run: pip install -r requirements.txt
+    
     - name: Run Script
       run: python3 src/main.py -r -s
+
     - name: Upload a picture
-      uses: devicons/public-upload-to-imgur@v2.2.1  # Use this for the most stable version
+      uses: devicons/public-upload-to-imgur@v2.2.1
       id: imgur_step
       with:
         path: result.png
         client_id: ${{secrets.IMGUR_CLIENT_ID}}
-    - name: Post comment
-      uses: peter-evans/create-or-update-comment@v1
-      env:
-        IMG_URL: ${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }} 
-      with:
-        issue-number: 1
-        body: |
-          ![image](${{env.IMG_URL}})
+      - name: Post comment
+        uses: peter-evans/create-or-update-comment@v1
+        env:
+          IMG_URL: ${{ fromJSON(steps.imgur_step.outputs.imgur_urls)[0] }} 
+        with:
+          issue-number: 1
+          body: |
+            ![image](${{env.IMG_URL}})
 
       
