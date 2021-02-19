@@ -6,8 +6,7 @@ on:
 
 jobs:
   build:
-    if: >-
-      contains(github.event.comment.body, '/run')
+    if: contains(github.event.comment.body, '/run')
 
     runs-on: ubuntu-latest
 
