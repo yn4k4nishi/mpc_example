@@ -9,8 +9,18 @@ python3
 - cvxpy
     - version 1.1.10
 
+#### 依存関係のインストール
+`pip3 install -r requirements.txt`
+
 ## 実行
-`python3 main.py`
+### ローカル
 
-ランダムに経路を生成する場合は`enable_random_path = False`を`True`にする
+- `python3 src/main.py` 
 
+経路をランダムにする場合は`-r`
+プロットを"result.png"で保存する場合は`-s`をつける
+
+ex ) `python3 src/main.py -r -s`
+
+### Github Action
+[issue#1](https://github.com/yn4k4nishi/mpc_example/issues/1)で"/run"とコメントすると数分後に結果の画像がコメントされる
