@@ -1,6 +1,9 @@
 name: Python package
 
-on: [push]
+on: 
+  [push]
+  issue_comment:
+    types: [created, edited]
 
 jobs:
   build:
@@ -34,5 +37,17 @@ jobs:
     - name: Archive results image
       uses: actions/upload-artifact@v2
       with:
-        name: result image
+        name: result_image
         path: result.png
+    - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: 1
+          body: |
+            This is a multi-line test comment
+            - With GitHub **Markdown** :sparkles:
+            - Created by [create-or-update-comment][1]
+
+            [1]: https://github.com/peter-evans/create-or-update-comment
+          reactions: '+1'
+      
