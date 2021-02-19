@@ -1,9 +1,6 @@
 name: Python package
 
-on: 
-  [push]
-  issue_comment:
-    types: [created, edited]
+on: [push]
 
 jobs:
   build:
