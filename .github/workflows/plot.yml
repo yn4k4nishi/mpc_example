@@ -45,6 +45,6 @@ jobs:
       with:
         issue-number: 1
         body: |
-          ${{env.IMG_URL}}
+          ![result](${{env.IMG_URL}})
 
       
