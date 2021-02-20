@@ -18,6 +18,7 @@ python3
 - `python3 src/main.py` 
 
 経路をランダムにする場合は`-r`
+
 プロットを"result.png"で保存する場合は`-s`をつける
 
 ex ) `python3 src/main.py -r -s`
