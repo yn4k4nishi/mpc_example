@@ -1,4 +1,4 @@
-# MPC demo
+# MPC example
 
 ![](result.png)
 
